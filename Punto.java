@@ -24,17 +24,19 @@ public class Punto
         return (float)Math.sqrt(x*x+y*y);
     }
 
-    public double anguloPolar () {
-        return Math.atan(y/x);
-        /*if ((x-x==0) && (y-y==0)) {
-            return Math.atan(y/x);
-        } else if (!(x-x==0) && (y-y==0)) {
-            return (180-Math.atan(y/x));
-        } else if ((x-x==0) && !(y-y==0)) {
-            return (360-Math.atan(y/x));
+    public float anguloPolar () {
+        if ((x>0) && (y>0)) {
+            return (float)Math.atan(y/x);
+        } else if (!(x>0) && (y>0)) {
+            return (float)(Math.PI-Math.atan(y/x));
+        } else if ((x>0) && !(y>0)) {
+            return (float)(2*Math.PI-Math.atan(y/x));
+        } else if ((x<0) && (y<0)) {
+            return (float)(Math.PI+Math.atan(y/x));
         } else {
-            return (180+Math.atan(y/x));
-        }*/
+            System.out.println("No hay angulo");
+            return 0.0;
+        }
     }
 
     public float distanciaEuclidiana (Punto otro) {
