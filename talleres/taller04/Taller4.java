@@ -28,7 +28,7 @@ public class Taller4
             if (start==0) {
                 return groupSum(start+1,array,target);
             } else {
-                return groupSum(start,array,target-array[start]) || groupSum(start+1,array,target);
+                return groupSum(start+1,array,target-array[start]) || groupSum(start+1,array,target);
             }
         }
     }
