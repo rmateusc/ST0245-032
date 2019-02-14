@@ -1,9 +1,6 @@
 
 /**
- * Write a description of class ComplejidadSuma here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * @daoterog @rmateusc
  */
 import java.util.concurrent.TimeUnit;
 public class Tiempos
@@ -41,7 +38,8 @@ public class Tiempos
     
     public static void mainGroupSum (String [] args) {
         for (int i=1;i<=20;i++) {
-            int [] b=generador(i);
+            //int [] b=generador(i);
+            int [] b=new int [i];
             //imprimir(b);
             int t=(int)Math.random()*100+30;
             //System.out.println(t);
