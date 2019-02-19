@@ -1,4 +1,5 @@
-public class 
+public class Recursion {
+// Recursion1:
 public int factorial(int n) {
   if (n==1){
       return n;
@@ -28,3 +29,7 @@ public int fibonacci(int n) {
   } else 
   return n;
 }
+//Recusion 2:
+
+}
+
