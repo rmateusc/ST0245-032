@@ -29,6 +29,14 @@ public int fibonacci(int n) {
   } else 
   return n;
 }
+  
+  public int triangle(int rows) {
+  if (rows<=1){
+    return rows;
+  } else {
+    return rows+triangle(rows-1);
+  }
+}
 //Recusion2:
 
 }
