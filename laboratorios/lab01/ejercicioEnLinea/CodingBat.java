@@ -50,7 +50,7 @@ public boolean groupSum6(int start, int[] nums, int target) {
 }
   
   public boolean groupSum5(int start, int[] nums, int target) {
-        if (target==0 && !aux(start,nums)) return true;
+        if (target==0 && !aux5(start,nums)) return true;
         else if (start==nums.length) || (target<0) return false;
         else if (nums[start]%5==0) return groupSum5(start+1,nums,target-nums[start]);
         else if (nums[start]>target) return false;
@@ -58,9 +58,34 @@ public boolean groupSum6(int start, int[] nums, int target) {
         else return groupSum5(start+1,nums,target-nums[start]) || groupSum5(start+1,nums,target);
     }
 
-    public boolean aux(int start, int[]nums) {
+    public boolean aux5(int start, int[]nums) {
         if (start==nums.length) return false;
         else if (nums[start]%5==0) return true;
         else return aux(start+1,nums);
     }
 }
+
+public boolean splitArray(int[] nums) {
+  return aux(nums,nums.length-1);
+}
+
+public boolean aux(int[] nums, int start) {
+  if (start<=0) return nums.length==0 ? true : nums[0]%2==0 && aux1(0,nums,nums[0]/2);
+  else {
+    nums[start-1]+=nums[start];
+    return aux(nums,start-1);
+  }
+}
+
+public boolean aux1(int start, int [] array, int target) {
+        if (start>=array.length) {
+            if (target==0) return true;
+            else return false;
+        } else if (array[start]>target) {
+            return groupSum(start+1,array,target);
+        } else if (target-array[start]==0) {
+            return true;
+        } else {
+            return groupSum(start+1,array,target) || groupSum(start+1,array,target-array[start]);
+        }
+    }
