@@ -50,9 +50,8 @@ public boolean groupSum6(int start, int[] nums, int target) {
 }
   
   public boolean groupSum5(int start, int[] nums, int target) {
-        if (0==target && !aux(start,nums)) return true;
-        else if (start==nums.length) return false;
-        else if (target<0) return false;
+        if (target==0 && !aux(start,nums)) return true;
+        else if (start==nums.length) || (target<0) return false;
         else if (nums[start]%5==0) return groupSum5(start+1,nums,target-nums[start]);
         else if (nums[start]>target) return false;
         else if (start!=0 && nums[start-1]==5 && nums[start]==1) return groupSum5(start+1,nums,target);
