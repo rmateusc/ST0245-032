@@ -1,6 +1,6 @@
 public class Recursion {
 // Recursion1:
-public int factorial(int n) {//T(n)=n*T(n-1)+C //O(n)=
+public int factorial(int n) {//T(n)=n*T(n-1)+C //O(n)=n
   if (n==1){ //C1
       return n;//C2
   } else //C3
