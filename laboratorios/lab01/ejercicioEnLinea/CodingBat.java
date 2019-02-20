@@ -89,6 +89,18 @@ public boolean aux1(int start, int [] array, int target) {
             return groupSum(start+1,array,target) || groupSum(start+1,array,target-array[start]);
         }
   
+  public boolean splitOdd10(int[] nums){
+  return auxSplit(nums,0,0,0);
+}
+
+public boolean auxSplit(int []nums, int start, int g1, int g2){
+  if (start==nums.length){
+    if (g1%10==0 && g2%2!=0){
+       return true;
+    } else return false;
+  } else return auxSplit(nums, start+1, g1+nums[start],g2)||auxSplit(nums, start+1,g1,g2+nums[start]);
+}
+  
   public boolean split53(int[] nums) {
   return aux53(nums,0,0,0);
 }
