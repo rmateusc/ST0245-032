@@ -88,4 +88,20 @@ public boolean aux1(int start, int [] array, int target) {
         } else {
             return groupSum(start+1,array,target) || groupSum(start+1,array,target-array[start]);
         }
+  public boolean split53(int[] nums) {
+  return aux53(nums,0,0,0);
+}
+
+public boolean aux53(int []nums, int start, int g1, int g2){
+  if (start>=nums.length){
+    if (g1==g2){
+      return true;
+    } else return false;
+  } else if (nums[start]%5==0){
+    return aux53(nums, start+1, g1+nums[start], g2);
+  } else if (nums[start]%3==0){
+    return aux53(nums, start+1, g1, g2+nums[start]);
+  } else 
+    return aux53(nums, start+1, g1+nums[start],g2) || aux53(nums, start+1, g1, g2+nums[start]);
+}
     }
