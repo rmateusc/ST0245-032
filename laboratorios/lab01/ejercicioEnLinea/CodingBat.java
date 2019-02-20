@@ -88,6 +88,7 @@ public boolean aux1(int start, int [] array, int target) {
         } else {
             return groupSum(start+1,array,target) || groupSum(start+1,array,target-array[start]);
         }
+  
   public boolean split53(int[] nums) {
   return aux53(nums,0,0,0);
 }
