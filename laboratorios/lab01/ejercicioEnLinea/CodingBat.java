@@ -66,28 +66,16 @@ public boolean groupSum6(int start, int[] nums, int target) {
 }
 
 public boolean splitArray(int[] nums) {
-  return aux(nums,nums.length-1);
+  return auxArray(nums,0,0,0);
 }
 
-public boolean aux(int[] nums, int start) {
-  if (start<=0) return nums.length==0 ? true : nums[0]%2==0 && aux1(0,nums,nums[0]/2);
-  else {
-    nums[start-1]+=nums[start];
-    return aux(nums,start-1);
-  }
+public boolean auxArray(int []nums, int start, int g1, int g2){
+  if (start==nums.length){
+    if (g1==g2){
+      return true;
+    } else return false;
+  } else return auxArray(nums,start+1,g1+nums[start],g2)||auxArray(nums,start+1,g1,g2+nums[start]);
 }
-
-public boolean aux1(int start, int [] array, int target) {
-        if (start>=array.length) {
-            if (target==0) return true;
-            else return false;
-        } else if (array[start]>target) {
-            return groupSum(start+1,array,target);
-        } else if (target-array[start]==0) {
-            return true;
-        } else {
-            return groupSum(start+1,array,target) || groupSum(start+1,array,target-array[start]);
-        }
   
   public boolean splitOdd10(int[] nums){
   return auxSplit(nums,0,0,0);
