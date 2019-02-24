@@ -61,7 +61,7 @@ public boolean groupSum6(int start, int[] nums, int target) {//T(n)=3*T(n-1)+C
     public boolean aux5(int start, int[]nums) {//T(n)=T(n-1)+c
         if (start==nums.length) return false;//C1
         else if (nums[start]%5==0) return true;//C2
-        else return aux(start+1,nums);//T(n-1)+C3
+        else return aux5(start+1,nums);//T(n-1)+C3
     }
 
 
