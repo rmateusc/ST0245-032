@@ -63,7 +63,7 @@ public boolean groupSum6(int start, int[] nums, int target) {//T(n)=3*T(n-1)+C
         else if (nums[start]%5==0) return true;//C2
         else return aux(start+1,nums);//T(n-1)+C3
     }
-}
+
 
 public boolean splitArray(int[] nums) {
   return auxArray(nums,0,0,0); //C
