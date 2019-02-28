@@ -33,8 +33,9 @@ public class textEditor
     public void agrandarTamano(char [] text1,int tamano) {
         text=new char[tamano];
         for (int i=0;i<text1.length;i++) {
-            text[i]=text1[i];            
+            text[i]=text1[i];  
         }        
+        text[text.length-1]=0;
     }
 
     public void reducirTamano (int index, char []text1, int tamano){
@@ -50,41 +51,27 @@ public class textEditor
 
     public void add(int index, char t){
         if (index<=text.length){
+            char ultima=text[text.length-1];
             agrandarTamano(text,text.length+1);
-            imprimir(text);
-            System.out.println(size());
-            organizador(index,t);
-            imprimir(text);
-            System.out.println(size());
+            organizador(index,t,ultima);
         } else 
             agrandarTamano(text,text.length+(index+1-text.length));
         text[index]=t;
     }
 
-    public void organizador (int index, char t){
-        if (index==text.length){
-            add(t);
-        }else{
-            char remplazo=text[index];
-            for (int i=index; i<text.length-1;i++){
-                if (i==index) {
-                    text[i]=t;
-                } else if (i==text.length-1){
-                    text[i]=remplazo;
-                } else{
-                    
-                    char remp = text[i];
-                    text[i]=remp;
-                    remp=text[i+1];
-                }
-
-                /*text[i]=text[i+1];
-                text[index]=t;
-                text[i+1]=remplazo;
-                 */
+    public void organizador (int index, char t, char ultima){
+        char remplazo=text[index];
+        char remp;
+        for (int i=index; i<text.length-1;i++){
+            if (i==index) {
+                text[i]=t;
+            } else{
+                remp = text[i];
+                text[i]=remplazo;
+                remplazo=remp;
             }
-            
         }
+        text[text.length-1]=ultima;
     }
 
     public void imprimir(char [] arraylist){
