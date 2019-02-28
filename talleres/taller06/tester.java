@@ -1,4 +1,3 @@
-//@rafa y @enemigo
 public class tester
 {
     public void main (){
@@ -38,3 +37,4 @@ public class tester
         }
     }
 }
+
