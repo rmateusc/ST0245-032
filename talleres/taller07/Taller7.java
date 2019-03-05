@@ -117,6 +117,15 @@ public class textEditor
         }
     }
     
+    public int convertInteger(char []array1){
+        int []array2 = new int [array1.length];
+        for (int i=0; i<array1.length;i++){
+            int pos=Character.getNumericValue(i);
+            array2[i]=pos;
+        }
+        return max(array2,0);
+    }
+    
     public int max(int [] array, int index){
         int max=array[0];
         if (index!=array.length){
