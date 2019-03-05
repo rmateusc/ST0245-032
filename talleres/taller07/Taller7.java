@@ -101,4 +101,19 @@ public class textEditor
                 System.out.print(arraylist[i]+" ");
         }
     }
+    
+    public boolean compararClases (char[] array1, char[] array2){
+        return auxComparar(array1,array2,0);
+    }
+    
+    public boolean auxComparar(char[]array1, char[]array2, int index){
+        if (array1[index]==array2[index]){
+            if (index==array1.length && index==array2.length){
+                return true;
+            }
+            return auxComparar(array1,array2,index+1);
+        } else {
+            return false;
+        }
+    }
 }
