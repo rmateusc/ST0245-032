@@ -127,13 +127,12 @@ public class textEditor
     }
     
     public int max(int [] array, int index){
-        int max=array[0];
-        if (index!=array.length){
-            if (max<array[index]){
-                max=array[index];
-            }
-            return max(array,index+1);
+        int max = array[0];
+        if (index==array.length){
+            return max;
+        } else {
+            max= Math.max(array[index+1],max(array,index+1));
+            return max;
         }
-        return max;
     }
 }
