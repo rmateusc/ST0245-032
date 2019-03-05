@@ -1,5 +1,7 @@
-
-    
+/**
+ * @daoterog @rmateusc
+ */
+import java.lang.ArrayIndexOutOfBoundsException;
 public class textEditor
 {    
     char [] text= new char [0];
@@ -7,12 +9,12 @@ public class textEditor
     public textEditor(){
     }
 
-    public void remove(int index){
+    public void remove(int index) throws ArrayIndexOutOfBoundsException {
         if (index<=text.length){
             text[index]='\u0000';
             reducirTamano(index,text, text.length-1);
         } else 
-            System.out.println("Error.arrayindexoutofboundsexception");
+            throw new  ArrayIndexOutOfBoundsException();
     }
 
     public int size(){
@@ -23,8 +25,7 @@ public class textEditor
         if (index<text.length){
             return text[index];
         } else 
-            System.out.println("Error.arrayindexoutofboundsexception");
-        return '\u0000';
+            throw new ArrayIndexOutOfBoundsException();
     }
 
     public void add(char t){
@@ -74,6 +75,22 @@ public class textEditor
             }
         }
         text[text.length-1]=ultima;
+    }
+    
+    public boolean contains (char a) {
+        for (int i=0;i<text.length;i++) {
+            if (a==text[i]) 
+            return true;
+        }
+        return false;
+    }
+    
+    public int indexOf (char a) {
+        for (int i=0;i<text.length;i++) {
+            if (a==text[i]) 
+            return i;
+        }
+        return -1;
     }
 
     public void imprimir(char [] arraylist){
