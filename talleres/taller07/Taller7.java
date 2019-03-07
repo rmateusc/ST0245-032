@@ -12,7 +12,7 @@ public class LinkedListDaniel
         first = null;   
     }
 
-    private Node getNode(int index) throws IndexOutOfBoundsException {
+    private Node getNode(int index) throws IndexOutOfBoundsException { // O(n)=nˆ2
         if (index >= 0 && index < size) {
             Node temp = first;
             for (int i = 0; i < index; i++) {
@@ -24,16 +24,16 @@ public class LinkedListDaniel
         }
     }
 
-    public int get(int index) throws IndexOutOfBoundsException {
+    public int get(int index) throws IndexOutOfBoundsException { //O(n)=1
         Node temp = getNode(index);
         return temp.data;
     }
 
-    public int size () {
+    public int size () { // O(n)=1
         return size;
     }
 
-    public int indexOf (int data) {
+    public int indexOf (int data) { // O(n)= n
         if (contains(data)) {
             return indexOfAux(first,data,0);
         } else {
@@ -41,15 +41,15 @@ public class LinkedListDaniel
         }
     }
 
-    public int indexOfAux(Node nodo, int data,int contador) {
+    public int indexOfAux(Node nodo, int data,int contador) { // O(n)=n
         return nodo.data==data ? contador : indexOfAux(nodo.next,data,contador++);
     }
 
-    public int max () {
+    public int max () { // O(n)=1
         return maxAux(first,first.data,0);
     }
 
-    public int maxAux (Node nodo, int max,int contador) {
+    public int maxAux (Node nodo, int max,int contador) { // O(n)= n
         if (contador==size) {
             return max;
         } else {
@@ -61,7 +61,7 @@ public class LinkedListDaniel
         }
     }
 
-    public boolean equals (LinkedListDaniel l1, LinkedListDaniel l2) {
+    public boolean equals (LinkedListDaniel l1, LinkedListDaniel l2) { // O(n)=n
         if (l1.size()==l2.size()) {
             return equalsAux(l1.first,l2.first,0,l1.size);
         } else {
@@ -69,11 +69,11 @@ public class LinkedListDaniel
         }
     }
 
-    public boolean equalsAux (Node l1, Node l2, int contador, int size) {
+    public boolean equalsAux (Node l1, Node l2, int contador, int size) { // O(n)=n
         return l1.data==l2.data ? contador==size ? true : equalsAux(l1.next,l2.next,contador++,size) : false;
     }
 
-    public void insert (int data, int index) throws IndexOutOfBoundsException {
+    public void insert (int data, int index) throws IndexOutOfBoundsException { // O(n)=n
         if (index>=0) {
             if(index==0) {
                 size++;
@@ -93,7 +93,7 @@ public class LinkedListDaniel
         }
     }
 
-    public void getLast () {
+    public void getLast () { // O(n)=nˆ2
         Node ultimo=first;
         for (int i=0;i<size-1;i++) {
             ultimo=ultimo.next;
@@ -101,7 +101,7 @@ public class LinkedListDaniel
         last=ultimo;
     }
 
-    public void insertAux2 (int dif,int data) {
+    public void insertAux2 (int dif,int data) { // O(n)=n
         if (dif>1) {
             Node agregar=new Node(0);
             getLast();
@@ -114,7 +114,7 @@ public class LinkedListDaniel
         }
     }
 
-    public void insertAux1 (Node nodo,int index, int contador, int data) {
+    public void insertAux1 (Node nodo,int index, int contador, int data) { // O(n)=n
         if (contador<index-1) {
             insertAux1(nodo,index,contador++,data);
         } else {
@@ -125,7 +125,7 @@ public class LinkedListDaniel
         }
     }
 
-    public void remove (int index) throws IndexOutOfBoundsException { 
+    public void remove (int index) throws IndexOutOfBoundsException { // O(n)=n
         if (index == 0){
             first = first.next;
         } else{
@@ -135,7 +135,7 @@ public class LinkedListDaniel
         }            
     }
 
-    public boolean contains (int data) {
+    public boolean contains (int data) { // O(n)=nˆ2
         Node node=first;
         for (int i=0;i<size;i++){
             if (node.data==data){
