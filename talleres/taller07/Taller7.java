@@ -1,4 +1,3 @@
-
 /**
  * @daoterog @rmateusc
  */
@@ -10,7 +9,7 @@ public class LinkedListDaniel
     public LinkedListDaniel()
     {
         size = 0;
-        first = null;	
+        first = null;   
     }
 
     private Node getNode(int index) throws IndexOutOfBoundsException {
@@ -33,7 +32,7 @@ public class LinkedListDaniel
     public int size () {
         return size;
     }
-    
+
     public int indexOf (int data) {
         if (contains(data)) {
             return indexOfAux(first,data,0);
@@ -41,15 +40,15 @@ public class LinkedListDaniel
             return -1;
         }
     }
-    
+
     public int indexOfAux(Node nodo, int data,int contador) {
         return nodo.data==data ? contador : indexOfAux(nodo.next,data,contador++);
     }
-    
+
     public int max () {
         return maxAux(first,first.data,0);
     }
-    
+
     public int maxAux (Node nodo, int max,int contador) {
         if (contador==size) {
             return max;
@@ -61,7 +60,7 @@ public class LinkedListDaniel
             }
         }
     }
-    
+
     public boolean equals (LinkedListDaniel l1, LinkedListDaniel l2) {
         if (l1.size()==l2.size()) {
             return equalsAux(l1.first,l2.first,0,l1.size);
@@ -69,13 +68,13 @@ public class LinkedListDaniel
             return false;
         }
     }
-    
+
     public boolean equalsAux (Node l1, Node l2, int contador, int size) {
         return l1.data==l2.data ? contador==size ? true : equalsAux(l1.next,l2.next,contador++,size) : false;
     }
 
     public void insert (int data, int index) throws IndexOutOfBoundsException {
-        if (index>1) {
+        if (index>=0) {
             if(index==0) {
                 size++;
                 Node agregar=new Node(data);
@@ -93,7 +92,7 @@ public class LinkedListDaniel
             throw new IndexOutOfBoundsException();
         }
     }
-    
+
     public void getLast () {
         Node ultimo=first;
         for (int i=0;i<size-1;i++) {
@@ -126,28 +125,25 @@ public class LinkedListDaniel
         }
     }
 
-    public void remove (int index) throws IndexOutOfBoundsException {
-        if (index>=0 && index<size) {
-            if (index==0) first=first.next;
-            else {
-                Node cambiar=removeAux(first,0,index-1);
-                cambiar.next=cambiar.next.next;
-            }
+    public void remove (int index) throws IndexOutOfBoundsException { 
+        if (index == 0){
+            first = first.next;
+        } else{
+            Node nodebefore = getNode(index-1);
+            nodebefore.next = nodebefore.next.next;
             size--;
-        } else {
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    public Node removeAux (Node nodo, int contador, int index) {
-        return contador==index ? nodo : removeAux(nodo.next,contador++,index);
+        }            
     }
 
     public boolean contains (int data) {
-        return containsAux(first,data,0);
-    }
-
-    public boolean containsAux (Node nodo, int data, int index) {
-        return index==size ? false : nodo.data==data ? true : containsAux(nodo.next,data,index++);
+        Node node=first;
+        for (int i=0;i<size;i++){
+            if (node.data==data){
+                return true;
+            } else {
+                node = node.next;
+            }
+        }
+        return false;
     }
 }
