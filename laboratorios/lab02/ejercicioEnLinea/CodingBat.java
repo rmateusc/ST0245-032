@@ -138,4 +138,15 @@ public class CodingBat
             return aux2(nums,index+=1,f);
         }
     }
+    
+    //Array 3
+    public int maxSpan(int[] nums) {
+  if (nums.length<=1){
+    return nums.length;
+  } else if (nums[0]==nums[nums.length-1]){
+  return nums.length;
+  } else {
+    return nums.length-1;
+  }
+}
 }
