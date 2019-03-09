@@ -138,15 +138,110 @@ public class CodingBat
             return aux2(nums,index+=1,f);
         }
     }
-    
-    //Array 3
-    public int maxSpan(int[] nums) {
-  if (nums.length<=1){
-    return nums.length;
-  } else if (nums[0]==nums[nums.length-1]){
-  return nums.length;
-  } else {
-    return nums.length-1;
-  }
+
+    //Array3
+
+    public int[] fix34(int[] nums) {
+        int c=next4(nums,0,0);
+        int[] n4=new int[c];
+        n4=next4(nums,0,0,n4);
+        return aux(nums,0,0,n4);
+    }
+
+    public int[] aux(int [] nums,int cont,int index,int[] n4){
+        if (cont==nums.length) {
+            return nums;
+        } else if (nums[cont]==3) {
+            int r=nums[cont+1];
+            nums[cont+1]=nums[n4[index]];
+            nums[n4[index]]=r;
+            return aux(nums,cont+1,index+1,n4);
+        }  else {
+            return aux(nums,cont+1,index,n4);
+        }
+    }
+
+    public int next4 (int [] nums,int index,int cont) {
+        if (index==nums.length) {
+            return cont;
+        } else if (nums[index]==4) {
+            return next4(nums,index+1,cont+1);
+        } else {
+            return next4(nums,index+1,cont);
+        }
+    }
+
+    public int[] next4 (int [] nums,int index,int cont,int[] n4) {
+        if (cont==n4.length) {
+            return n4;
+        }else if (nums[index]==4) {
+            n4[cont]=index;
+            return next4(nums,index+1,cont+1,n4);
+        } else {
+            return next4(nums,index+1,cont,n4);
+        }
+    }
+
+    public int[] fix45(int[] nums) {
+        int c=next5(nums,0,0);
+        int[] n4=new int[c];
+        n4=next5(nums,0,0,n4);
+        return aux1(nums,nums.length-1,0,n4);
+    }
+
+    public int[] aux1(int [] nums,int cont,int index,int[] n4){
+        if (cont==-1) {
+            return nums;
+        } else if (nums[cont]==4) {
+            int r=nums[cont+1];
+            nums[cont+1]=nums[n4[index]];
+            nums[n4[index]]=r;
+            return aux1(nums,cont-1,index+1,n4);
+        }  else {
+            return aux1(nums,cont-1,index,n4);
+        }
+    }
+
+    public int next5 (int [] nums,int index,int cont) {
+        if (index==nums.length) {
+            return cont;
+        } else if (nums[index]==5) {
+            return next5(nums,index+1,cont+1);
+        } else {
+            return next5(nums,index+1,cont);
+        }
+    }
+
+    public int[] next5 (int [] nums,int index,int cont,int[] n4) {
+        if (cont==n4.length) {
+            return n4;
+        }else if (nums[index]==5) {
+            n4[cont]=index;
+            return next5(nums,index+1,cont+1,n4);
+        } else {
+            return next5(nums,index+1,cont,n4);
+        }
+    }
+
+    public boolean linearIn(int[] outer, int[] inner) {
+        if (inner.length==0 && outer.length==0) return true;
+        else if (inner.length==0) return true;
+        else if (outer.length==0) return false;
+        else return aux(outer,inner,0,0);
+    }
+
+    public boolean aux (int[] outer,int[] inner, int cont,int cont2) {
+        if (cont2==outer.length) {
+            return false;
+        } else if (inner[cont]==outer[cont2]) {
+            if (cont==inner.length-1) {
+                return true;
+            } else {
+                return aux(outer,inner,cont+1,cont2+1);
+            }
+        } else {
+            return aux(outer,inner,cont,cont2+1);
+        }
+    }
 }
-}
+
