@@ -1,6 +1,6 @@
 public class Punto1
 {
-    
+
     public void insertionSort (int[] array){  
         for (int i=0;i<array.length;i++) { 
             int menor=array[i];
@@ -14,37 +14,48 @@ public class Punto1
                 j++;
             }
         }
-        System.out.println("InsertionSort");
-        System.out.println(array);
+        System.out.println("Size"+array.length);
     }
 
-    public static void mergeSort(int A[],int left, int rigth){
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (Exception m) {
+    public static void mergeSort(int[] a, int n) {
+       
+        if (n < 2) {
+            return;
         }
-        if (left<rigth){
-            int middle=(left+rigth)/2;
-            mergeSort(A,left, middle);
-            mergeSort(A,middle+1, rigth);
-            merge(A,left, middle, rigth);
+        int mid = n / 2;
+        int[] l = new int[mid];
+        int[] r = new int[n - mid];
+
+        for (int i = 0; i < mid; i++) {
+            l[i] = a[i];
+        }
+        for (int i = mid; i < n; i++) {
+            r[i - mid] = a[i];
+        }
+        mergeSort(l, mid);
+        mergeSort(r, n - mid);
+
+        merge(a, l, r, mid, n - mid);
+    }
+
+    public static void merge(
+    int[] a, int[] l, int[] r, int left, int right) {
+
+        int i = 0, j = 0, k = 0;
+        while (i < left && j < right) {
+            if (l[i] <= r[j]) {
+                a[k++] = l[i++];
+            }
+            else {
+                a[k++] = r[j++];
+            }
+        }
+        while (i < left) {
+            a[k++] = l[i++];
+        }
+        while (j < right) {
+            a[k++] = r[j++];
         }
     }
 
-    public static void merge(int A[],int left, int middle, int rigth){
-        int i, j, k;
-        int [] B = new int[A.length]; 
-        for (i=left; i<=rigth; i++) 
-            B[i]=A[i];
-
-        i=left; j=middle+1; k=left;
-        while (i<=middle && j<=rigth) 
-            if (B[i]<=B[j])
-                A[k++]=B[i++];
-            else
-                A[k++]=B[j++];
-        while (i<=middle) 
-            A[k++]=B[i++]; 
-    }
-    
 }
