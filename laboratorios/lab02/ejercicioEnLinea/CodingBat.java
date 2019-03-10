@@ -4,15 +4,15 @@
  */
 public class CodingBat
 {
-    public String[] fizzBuzz(int start, int end) {
-        String [] l = new String [end-start];
-        return aux(start,end,l,0);
+    public String[] fizzBuzz(int start, int end) { //T(n)=C+T(n-1) O(n)=n; 
+        String [] l = new String [end-start]; //C
+        return aux(start,end,l,0); //C1
     }
 
-    public String[] aux(int start,int end,String[] l,int cont) {
-        if (start==end){
+    public String[] aux(int start,int end,String[] l,int cont) { //T(n)=C+T(n-1) O(n)=n; 
+        if (start==end){ //c1
             return l;
-        } else {
+        } else { //C2
             if (start%3==0 && start%5==0) {
                 l[cont]="FizzBuzz";
                 return aux(start+=1,end,l,cont+=1);
@@ -24,7 +24,7 @@ public class CodingBat
                 return aux(start+=1,end,l,cont+=1);
             } else {
                 l[cont]=start+"";
-                return aux(start+=1,end,l,cont+=1);
+                return aux(start+1,end,l,cont+1); //T(n-1) + C
             }
         }
     }  
@@ -39,7 +39,7 @@ public class CodingBat
             return nums;
         } else if (nums[cont]==0) {
             nums[cont]=aux(nums,cont+1,0);
-            return zeroAux(nums,cont+=1);
+            return zeroAux(nums,cont+=1); 
         } else {
             return zeroAux(nums,cont+=1);
         }
