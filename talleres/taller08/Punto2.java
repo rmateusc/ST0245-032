@@ -14,10 +14,10 @@ public class Punto2
 
     public void entregas (){
         for(int i=0;i<pedidos.size();i++){
-            Pedido pedido = pedidos.remove();
-            int cantidadPedido = Pedido.getCantidad();
-            System.out.println("Tienda: "+pedido.getNombreTienda());
-            while(neveras.size() != 0 && Pedido.getCantidad() != 0){
+            Pedido p=pedidos.remove();
+            int cantidadPedido = p.getCantidad();
+            System.out.println("Tienda: "+p.getNombreTienda()+" ");
+            while(neveras.size()!=0 && cantidadPedido!=0){
                 System.out.println(" "+neveras.pop().getNumero()+"-"+neveras.pop().getDescripcion());
                 cantidadPedido--;
             }
