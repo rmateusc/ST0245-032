@@ -1,11 +1,11 @@
 import java.util.*;
-public class robotBloques
+public class RobotBloques
 {
     static Stack <Integer> lista [];
     static String input;
     static int pos[];
     Scanner sc = new Scanner(System.in);
-    public robotBloques (int n){
+    public RobotBloques (int n){
         this.lista=new Stack[n];
     }
 
