@@ -1,27 +1,26 @@
 
 /**
- * Write a description of class Quadtree here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * @rmateusc @daoterog
  */
 import java.util.ArrayList;
 import java.util.LinkedList;
 public class Octree
 {
     private ArrayList<LinkedList> tabla=new ArrayList(8);
-    private int midD,midW,midH;
+    private double midD,midW,midH,diagonal;
     public Octree(Area area,LinkedList<Abeja> abejas) {
         midD=area.getDepth()/2;
         midW=area.getWidth()/2;
         midH=area.getHeight()/2;
+        double ph=Math.sqrt(Math.pow(midD,2)+Math.pow(midW,2));
+        diagonal=Math.sqrt(Math.pow(ph,2)+Math.pow(midH,2));
         for (int i=0;i<abejas.size();++i) {
             hashing(abejas.getFirst());
             abejas.removeFirst();
         }
         nuevoOct();
     }
-
+   
     private void hashing(Abeja abeja) {
         if (abeja.getPunto().getX()<=midW) {
             if (abeja.getPunto().getZ()<=midD) {
@@ -105,7 +104,7 @@ public class Octree
     public void nuevoOct() {
         int cont=0;
         for (int i=0;i<8;++i) {
-            if (tabla.get(i).size()>9) {
+            if (diagonal<=100) {
                 Area are=new Area(midD,midW,midH);
                 Octree oct=new Octree(are,tabla.get(i));
             } else {
@@ -114,3 +113,4 @@ public class Octree
         }
     }
 }
+
