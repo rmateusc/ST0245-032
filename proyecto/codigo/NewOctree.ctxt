@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=NewOctree
+comment1.params=bees\ maxlat\ minlat\ maxlon\ minlon\ maxalt\ minalt
+comment1.target=NewOctree(java.util.ArrayList,\ double,\ double,\ double,\ double,\ double,\ double)
+numComments=2
