@@ -59,18 +59,3 @@ public class Tree
             }
         }
     }
-    
-    public void remove (int dato) {
-        removeAux(root,dato);
-    }
-    
-    public void removeAux(Nodo root, int dato) {
-        if (root.getDato()==dato) {
-            if (root.getRoot().getIzquierdo().getDato()==dato) {
-                
-            } else {
-                
-            }
-        }
-    }
-}
