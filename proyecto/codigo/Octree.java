@@ -1,4 +1,3 @@
-
 /**
  * @rmateusc @daoterog
  */
@@ -6,111 +5,89 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 public class Octree
 {
-    private ArrayList<LinkedList> tabla=new ArrayList(8);
+    private ArrayList<ArrayList> tabla=new ArrayList(8);
     private double midD,midW,midH,diagonal;
-    public Octree(Area area,LinkedList<Abeja> abejas) {
-        midD=area.getDepth()/2;
-        midW=area.getWidth()/2;
-        midH=area.getHeight()/2;
-        double ph=Math.sqrt(Math.pow(midD,2)+Math.pow(midW,2));
-        diagonal=Math.sqrt(Math.pow(ph,2)+Math.pow(midH,2));
-        for (int i=0;i<abejas.size();++i) {
-            hashing(abejas.getFirst());
-            abejas.removeFirst();
+    public Octree(ArrayList<Bee> abejas,ArrayList<Double> mins,double midD,double midW,double midH) {
+        for (int i=0;i<8;++i) {
+            ArrayList<Bee> ab=new ArrayList();
+            tabla.add(ab);
         }
-        nuevoOct();
+        this.midD=midD;
+        this.midW=midW;
+        this.midH=midH;
+        double ph=Math.sqrt(Math.pow(midD*111325,2)+Math.pow(midW*111325,2));
+        diagonal=Math.sqrt(Math.pow(ph,2)+Math.pow(midH,2));
+        if (diagonal>100) {
+            for (int i=0;i<abejas.size();++i) {
+                hashing(abejas.get(i),mins);
+            }
+            nuevoOct(mins);
+        } else {
+            if (abejas.size()>1) choque(abejas);
+            else System.out.println("ABEJA SOLAA");
+        }
     }
-   
-    private void hashing(Abeja abeja) {
-        if (abeja.getPunto().getX()<=midW) {
-            if (abeja.getPunto().getZ()<=midD) {
-                if (abeja.getPunto().getY()<=midH) {
-                    if (tabla.get(0)==null) {
-                        LinkedList<Abeja> bees=new LinkedList();
-                        bees.add(abeja);
-                        tabla.add(0,bees);
-                    } else {
-                        tabla.get(0).add(abeja);
-                    }
+
+    public void choque(ArrayList<Bee> abejas) {
+        System.out.println("Las abejas en las siguientes coordenadas estan en peligro de chocarse");
+        for (int i=0;i<abejas.size();++i) {
+            System.out.println(abejas.get(i).getLatitude()+","+abejas.get(i).getLongitude()+","+abejas.get(i).getAltitude());
+        }
+    }
+
+    private void hashing(Bee abeja,ArrayList<Double> mins) {
+        if (abeja.getLatitude()<=mins.get(0)+midW) {
+            if (abeja.getLongitude()<=mins.get(1)+midD) {
+                if (abeja.getAltitude()<=mins.get(2)+midH) {
+                    tabla.get(0).add(abeja);
                 } else {
-                    if (tabla.get(1)==null) {
-                        LinkedList<Abeja> bees=new LinkedList();
-                        bees.add(abeja);
-                        tabla.add(1,bees);
-                    } else {
-                        tabla.get(1).add(abeja);
-                    }
+                    tabla.get(1).add(abeja);
                 }
             } else {
-                if (abeja.getPunto().getY()<=midH) {
-                    if (tabla.get(2)==null) {
-                        LinkedList<Abeja> bees=new LinkedList();
-                        bees.add(abeja);
-                        tabla.add(2,bees);
-                    } else {
-                        tabla.get(2).add(abeja);
-                    }
+                if (abeja.getAltitude()<=mins.get(2)+midH) {
+                    tabla.get(2).add(abeja);
                 } else {
-                    if (tabla.get(3)==null) {
-                        LinkedList<Abeja> bees=new LinkedList();
-                        bees.add(abeja);
-                        tabla.add(3,bees);
-                    } else {
-                        tabla.get(3).add(abeja);
-                    }
+                    tabla.get(3).add(abeja);
                 }
             }
         } else {
-            if (abeja.getPunto().getZ()<=midD) {
-                if (abeja.getPunto().getY()<=midH) {
-                    if (tabla.get(4)==null) {
-                        LinkedList<Abeja> bees=new LinkedList();
-                        bees.add(abeja);
-                        tabla.add(4,bees);
-                    } else {
-                        tabla.get(4).add(abeja);
-                    }
+            if (abeja.getLongitude()<=mins.get(1)+midD) {
+                if (abeja.getAltitude()<=mins.get(2)+midH) {
+                    tabla.get(4).add(abeja);
                 } else {
-                    if (tabla.get(5)==null) {
-                        LinkedList<Abeja> bees=new LinkedList();
-                        bees.add(abeja);
-                        tabla.add(5,bees);
-                    } else {
-                        tabla.get(5).add(abeja);
-                    }
+                    tabla.get(5).add(abeja);
                 }
             } else {
-                if (abeja.getPunto().getY()<=midH) {
-                    if (tabla.get(6)==null) {
-                        LinkedList<Abeja> bees=new LinkedList();
-                        bees.add(abeja);
-                        tabla.add(6,bees);
-                    } else {
-                        tabla.get(6).add(abeja);
-                    }
+                if (abeja.getAltitude()<=mins.get(2)+midH) {
+                    tabla.get(6).add(abeja);
                 } else {
-                    if (tabla.get(7)==null) {
-                        LinkedList<Abeja> bees=new LinkedList();
-                        bees.add(abeja);
-                        tabla.add(7,bees);
-                    } else {
-                        tabla.get(7).add(abeja);
-                    }
+                    tabla.get(7).add(abeja);
                 }
             }
         }
     }
 
-    public void nuevoOct() {
-        int cont=0;
+    public void nuevoOct(ArrayList<Double> mins) {
         for (int i=0;i<8;++i) {
-            if (diagonal<=100) {
-                Area are=new Area(midD,midW,midH);
-                Octree oct=new Octree(are,tabla.get(i));
-            } else {
-                
-            }
+            if (tabla.get(i).size()!=0) {
+                if (i==0) {
+                    Octree oct=new Octree(tabla.get(i),mins,midD/2,midW/2,midH/2);
+                } else if (i==1) {
+                    Octree oct=new Octree(tabla.get(i),mins,midD/2,midW/2,3*midH/2);
+                } else if (i==2) {
+                    Octree oct=new Octree(tabla.get(i),mins,midD/2,3*midW/2,midH/2);
+                } else if (i==3) {
+                    Octree oct=new Octree(tabla.get(i),mins,midD/2,3*midW/2,3*midH/2);
+                } else if (i==4) {
+                    Octree oct=new Octree(tabla.get(i),mins,3*midD/2,midW/2,midH/2);
+                } else if (i==5) {
+                    Octree oct=new Octree(tabla.get(i),mins,3*midD/2,midW/2,3*midH/2);
+                } else if (i==6) {
+                    Octree oct=new Octree(tabla.get(i),mins,3*midD/2,3*midW/2,midH/2);
+                } else {
+                    Octree oct=new Octree(tabla.get(i),mins,3*midD/2,3*midW/2,3*midH/2);
+                }
+            } 
         }
     }
 }
-
