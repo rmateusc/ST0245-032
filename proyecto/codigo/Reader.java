@@ -2,15 +2,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Collections; 
 public class Reader
 {
     String [] str;
-    ArrayList <Double> lat = new ArrayList<Double>();
-    ArrayList <Double> lon = new ArrayList<Double>();
-    ArrayList <Double> alt = new ArrayList<Double>();
-    ArrayList <String> r=new ArrayList<String>();
-    ArrayList <Bee> bees=new ArrayList <Bee>();
+    ArrayList<Double> lat = new ArrayList();
+    ArrayList<Double> lon = new ArrayList();
+    ArrayList<Double> alt = new ArrayList();
+    ArrayList<Bee> bees=new ArrayList();
     public Reader (String dir) throws IOException{
         try (BufferedReader br=new BufferedReader(new FileReader(dir))){
             String line;
@@ -34,21 +34,19 @@ public class Reader
         } catch (Exception e){
         }
     }
-    
+
     public void getMaxMin(ArrayList lat, ArrayList lon, ArrayList alt){
         double minlat=(double)Collections.min(lat);
         double maxlat=(double)Collections.max(lat);
-        
+
         double minlon=(double)Collections.min(lon);
         double maxlon=(double)Collections.max(lon);
-        
+
         double minalt=(double)Collections.min(alt);
         double maxalt=(double)Collections.max(alt);
-        
-        
-        
-        NewOctree octree= new NewOctree(bees,minlat,maxlat,minlon,maxlon,minalt,maxalt);
-       
-        
+
+        ArrayList<Double> mins=new ArrayList();
+        mins.add(minlat);mins.add(minlon);mins.add(minalt);
+        Octree octree= new Octree(bees,mins,(maxlat-minlat)/2,(maxlon-minlon)/2,(maxalt-minalt)/2);
     }
 }
