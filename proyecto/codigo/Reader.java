@@ -47,6 +47,22 @@ public class Reader
 
         ArrayList<Double> mins=new ArrayList();
         mins.add(minlat);mins.add(minlon);mins.add(minalt);
-        Octree octree= new Octree(bees,mins,(maxlat-minlat)/2,(maxlon-minlon)/2,(maxalt-minalt)/2);
+        double midD=(maxlat-minlat)/2;
+        double midW=(maxlon-minlon)/2;
+        double midH=(maxalt-minalt)/2;
+        double ph=Math.sqrt(Math.pow((midD)*111325,2)+Math.pow((midW)*111325,2));
+        double diagonal=Math.sqrt(Math.pow(ph,2)+Math.pow((midH),2));
+        if (diagonal>100) {
+            Octree octree= new Octree(bees,mins,midD,midW,midH);
+        } else {
+            choque(bees);
+        }
+    }
+    
+    public void choque(ArrayList<Bee> abejas) {
+        System.out.println("Las abejas en las siguientes coordenadas estan en peligro de chocarse");
+        for (int i=0;i<abejas.size();++i) {
+            System.out.println(abejas.get(i).getLatitude()+","+abejas.get(i).getLongitude()+","+abejas.get(i).getAltitude());
+        }
     }
 }
