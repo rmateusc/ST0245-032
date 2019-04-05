@@ -2,7 +2,6 @@
  * @rmateusc @daoterog
  */
 import java.util.ArrayList;
-import java.util.LinkedList;
 public class Octree
 {
     private ArrayList<ArrayList> tabla=new ArrayList(8);
@@ -69,19 +68,55 @@ public class Octree
                     if (i==0) {
                         Octree oct=new Octree(tabla.get(i),mins,midD/2,midW/2,midH/2);
                     } else if (i==1) {
-                        Octree oct=new Octree(tabla.get(i),mins,midD/2,midW/2,3*midH/2);
+                        double nuevoH=mins.get(2)+midH;
+                        mins.remove(2);
+                        mins.add(2,nuevoH);
+                        Octree oct=new Octree(tabla.get(i),mins,midD/2,midW/2,midH/2);
                     } else if (i==2) {
-                        Octree oct=new Octree(tabla.get(i),mins,midD/2,3*midW/2,midH/2);
+                        double nuevoW=mins.get(1)+midW;
+                        mins.remove(1);
+                        mins.add(1,nuevoW);
+                        Octree oct=new Octree(tabla.get(i),mins,midD/2,midW/2,midH/2);
                     } else if (i==3) {
-                        Octree oct=new Octree(tabla.get(i),mins,midD/2,3*midW/2,3*midH/2);
+                        double nuevoH=mins.get(2)+midH;
+                        mins.remove(2);
+                        mins.add(2,nuevoH);
+                        double nuevoW=mins.get(1)+midW;
+                        mins.remove(1);
+                        mins.add(1,nuevoW);
+                        Octree oct=new Octree(tabla.get(i),mins,midD/2,midW/2,midH/2);
                     } else if (i==4) {
-                        Octree oct=new Octree(tabla.get(i),mins,3*midD/2,midW/2,midH/2);
+                        double nuevoD=mins.get(0)+midD;
+                        mins.remove(0);
+                        mins.add(0,nuevoD);
+                        Octree oct=new Octree(tabla.get(i),mins,midD/2,midW/2,midH/2);
                     } else if (i==5) {
-                        Octree oct=new Octree(tabla.get(i),mins,3*midD/2,midW/2,3*midH/2);
+                        double nuevoD=mins.get(0)+midD;
+                        mins.remove(0);
+                        mins.add(0,nuevoD);
+                        double nuevoH=mins.get(2)+midH;
+                        mins.remove(2);
+                        mins.add(2,nuevoH);
+                        Octree oct=new Octree(tabla.get(i),mins,midD/2,midW/2,midH/2);
                     } else if (i==6) {
-                        Octree oct=new Octree(tabla.get(i),mins,3*midD/2,3*midW/2,midH/2);
+                        double nuevoD=mins.get(0)+midD;
+                        mins.remove(0);
+                        mins.add(0,nuevoD);
+                        double nuevoW=mins.get(1)+midW;
+                        mins.remove(1);
+                        mins.add(1,nuevoW);
+                        Octree oct=new Octree(tabla.get(i),mins,midD/2,midW/2,midH/2);
                     } else {
-                        Octree oct=new Octree(tabla.get(i),mins,3*midD/2,3*midW/2,3*midH/2);
+                        double nuevoD=mins.get(0)+midD;
+                        mins.remove(0);
+                        mins.add(0,nuevoD);
+                        double nuevoW=mins.get(1)+midW;
+                        mins.remove(1);
+                        mins.add(1,nuevoW);
+                        double nuevoH=mins.get(2)+midH;
+                        mins.remove(2);
+                        mins.add(2,nuevoH);
+                        Octree oct=new Octree(tabla.get(i),mins,midD/2,midW/2,midH/2);
                     }
                 } 
             }
