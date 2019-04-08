@@ -34,7 +34,7 @@ public class Reader
         try (BufferedReader br=new BufferedReader(new FileReader(dir))){
             String line;
             while ((line=br.readLine())!=null){ //si da
-                splitString(line);
+                createBee(line);
             } 
         } catch (IOException e){
             e.printStackTrace();
@@ -48,7 +48,7 @@ public class Reader
      * ArrayList, creara la abeja con sus coordenadas y la agregara a su ArrayList.
      * @param String s: linea de coordenadas
      */
-    public void splitString(String s){
+    public void createBee(String s){
         String [] str=s.split(",");  
         try{
             lat.add(Double.parseDouble(str[0]));
