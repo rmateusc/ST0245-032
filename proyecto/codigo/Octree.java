@@ -169,7 +169,9 @@ public class Octree
             }
         } else {
             for (int i=0;i<8;++i) {
-                choque(tabla.get(i));
+                for (int i=0;i<8;++i) {
+                if (tabla.get(i).size()>0) choque(tabla.get(i));
+            }
             }
         }
     }
