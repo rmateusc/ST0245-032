@@ -84,7 +84,7 @@ public class Reader
 
         ArrayList<Double> mins=new ArrayList();
         mins.add(minlat);mins.add(minlon);mins.add(minalt);
-        double midD=(maxlat+minlat)/2;
+        double midD=(minlat-maxlat)/2;
         double midW=(maxlon-minlon)/2;
         double midH=(maxalt-minalt)/2;
         double ph=Math.sqrt(Math.pow((midD)*111325,2)+Math.pow((midW)*111325,2));
