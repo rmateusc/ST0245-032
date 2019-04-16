@@ -42,4 +42,8 @@ public class Nodo
     public void setDerecho (Nodo der) {
         this.der=der;
     }
+    
+    public String toString () {
+        return dato+"";
+    }
 }
