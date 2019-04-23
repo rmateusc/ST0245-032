@@ -7,8 +7,8 @@ import java.util.Collections;
 /**
  * Esta clase se encarga de leer un archivo de texto que contiene un numero 
  * indeterminado de abejas, identificando sus coordenadas y almacenandolas en 
- * en un ArrayList de objetos Bee. Asi mismo, se encarga de guardar las 
- * coordenadas de cada abeja en otros ArrayList correspondientes a cada 
+ * en un LinkedList de objetos Bee. Asi mismo, se encarga de guardar las 
+ * coordenadas de cada abeja en otros LinkedList correspondientes a cada 
  * coordenada, para asi poder pasarselo a la clase Octree, la cual los necesita
  * para funcionar.
  * @author: Daniel Otero Gomez, Rafael Mateus Carrion. 
@@ -19,14 +19,14 @@ import java.util.Collections;
 public class Reader
 {
     //Arreglos que guardan abejas y coordenadas
-    ArrayList<Double> lat = new ArrayList();
-    ArrayList<Double> lon = new ArrayList();
-    ArrayList<Double> alt = new ArrayList();
-    ArrayList<Bee> bees=new ArrayList();
+    LinkedList<Double> lat = new LinkedList();
+    LinkedList<Double> lon = new LinkedList();
+    LinkedList<Double> alt = new LinkedList();
+    LinkedList<Bee> bees=new LinkedList();
     /**
      * Este metodo se encarga de recibir una direccion de archivo guardado en 
      * el computador y leer las lineas para asi poder pasarselas a un metodo 
-     * que pueda guardar su informacion en su respetiv ArrayList
+     * que pueda guardar su informacion en su respetivo LinkedList
      * @param String dir: direccion del archivo guardado
      * @see splitString
      */
@@ -34,7 +34,7 @@ public class Reader
         try (BufferedReader br=new BufferedReader(new FileReader(dir))){
             String line;
             while ((line=br.readLine())!=null){ //si da
-                createBee(line);
+                splitString(line);
             } 
         } catch (IOException e){
             e.printStackTrace();
@@ -45,17 +45,17 @@ public class Reader
     /**
      * Este metodo se encarga de recibir cada linea de coordenadas que se le es 
      * otorgada por el metodo leer, aqui guardara las coordenadas en sus respectivos
-     * ArrayList, creara la abeja con sus coordenadas y la agregara a su ArrayList.
+     * LinkedList, creara la abeja con sus coordenadas y la agregara a su LinkedList.
      * @param String s: linea de coordenadas
      */
-    public void createBee(String s){
+    public void splitString(String s){
         String [] str=s.split(",");  
         try{
-            lat.add(Double.parseDouble(str[0]));
-            lon.add(Double.parseDouble(str[1]));
-            alt.add(Double.parseDouble(str[2]));
+            lat.addFirst(Double.parseDouble(str[0]));
+            lon.addFirst(Double.parseDouble(str[1]));
+            alt.addFirst(Double.parseDouble(str[2]));
             Bee bee=new Bee(Double.parseDouble(str[0]),Double.parseDouble(str[1]),Double.parseDouble(str[2]));
-            bees.add(bee);
+            bees.addFirst(bee);
         } catch (Exception e){
         }
     }
@@ -63,7 +63,7 @@ public class Reader
     /**
      * Este metodo se encarga de obtener los minimos y los maximos de cada 
      * coordenada, para asi poder estimar una la longitud de las diagonales 
-     * que seran creadas en la primera dicivision del Octree, y determinar si 
+     * que seran creadas en la primera division del Octree, y determinar si 
      * vale la pena crear un Octree con este conjunto de datos. Asi mismo, 
      * este es el ultimo paso de esta clase antes de empezar a trabajar
      * con nuestra estructura de datos Octree. Si no vale la pena crear el 
@@ -90,7 +90,8 @@ public class Reader
         double ph=Math.sqrt(Math.pow((midD)*111325,2)+Math.pow((midW)*111325,2));
         double diagonal=Math.sqrt(Math.pow(ph,2)+Math.pow((midH),2));
         if (diagonal>100) {
-            Octree octree= new Octree(bees,mins,midD,midW,midH);
+            Octree octree=new Octree();
+            octree.octree(bees,mins,midD,midW,midH);
         } else {
             choque();
         }
@@ -104,7 +105,7 @@ public class Reader
     public void choque() {
         System.out.println("Las abejas en las siguientes coordenadas estan en peligro de chocarse");
         for (int i=0;i<bees.size();++i) {
-            System.out.println(bees.get(i).getLatitude()+","+bees.get(i).getLongitude()+","+bees.get(i).getAltitude());
+            System.out.println(bees.poll().getLatitude()+","+bees.poll().getLongitude()+","+bees.poll().getAltitude());
         }
     }
 }
