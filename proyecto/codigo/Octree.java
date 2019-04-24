@@ -45,7 +45,7 @@ public class Octree
         for (int i=0;i<abejas.size();++i) {
             Bee abeja=abejas.poll();
             int sector=hashing(abeja,mins);
-            octree.get(sector).add(abeja);
+            octree.get(sector).addFirst(abeja);
         }
         double ph=Math.sqrt(Math.pow((midD)*111325,2)+Math.pow((midW)*111325,2)); //Primera hipotenusa
         double diagonal=Math.sqrt(Math.pow(ph,2)+Math.pow((midH),2)); 
