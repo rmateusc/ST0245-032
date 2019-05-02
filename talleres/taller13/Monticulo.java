@@ -5,39 +5,39 @@ public class Monticulo {
 
     // Variables de la clase Monticulo
     static int[] monticulo;
-    static int numElementos;
-    static int maxElementos;
+    static int size;
+    static int max;
 
     /** Constructor de la clase Monticulo que genera un objeto de tipo Monticulo pasando por parametro
     /   el numero de elementos y el numero maximo
      */
-    public Monticulo (int num, int max) {
-        numElementos=0;
-        maxElementos=max;
+    public Monticulo (int max) {
+        size=0;
+        this.max=max;
         monticulo=new int[max]; 
     }
 
     /** Constructor de la clase Monticulo que genera un objeto de tipo Monticulo pasando por parametro un vector
-    /
+    /   
     /
      */
 
     public Monticulo (int[] vector, int max) {
         monticulo=vector; 
-        maxElementos=max;
-        numElementos=vector.length;
+        this.max=max;
+        size=vector.length;
     }
 
     //devuelve cierto si el montículo está vacío.
     public boolean EmptyHeap() {
-        return numElementos==0;
+        return size==0;
     }
 
     //reubica el elemento i-esimo del vector en caso de que este sea mayor que el
     //padre (montículo de maximos).
-    public static void flotar (int elemento) {//reacomodar
+    public static void flotar (int elemento) {
         int posicion=0;
-        for(int i=0; i<monticulo.length; i++){//busca poscion elemento 
+        for(int i=0; i<monticulo.length; i++){ 
             if(monticulo[i]==elemento){
                 posicion=i;
                 break;
@@ -69,35 +69,30 @@ public class Monticulo {
                 break;
             }
         }
-        int posicionHijoI = (posicion*2) + 1;
-        int posicionHijoD = (posicion*2) + 2;
-        if(elemento>monticulo[posicionHijoI]){
-            flotar(monticulo[posicionHijoI]);
+        int hijoIzq = (posicion*2) + 1;
+        int hijoDer = (posicion*2) + 2;
+        if (elemento>monticulo[hijoDer]){
+            flotar(monticulo[hijoDer]);
         }
-        else if(elemento>monticulo[posicionHijoD]){
-            flotar(monticulo[posicionHijoD]);
+        else if(elemento>monticulo[hijoIzq]){
+            flotar(monticulo[hijoIzq]);
         }
         else{
             System.out.println("");
         }
-
     }
     //inserta un elemento en el montículo y lo flota hasta restaurar la propiedad de
     //montículo.
     public static void insert(int elemento) {
-        monticulo[numElementos]=elemento;
-        int posicionPadre=(numElementos-1)/2;
+        monticulo[size]=elemento;
+        int posicionPadre=(size-1)/2;
         if(elemento<monticulo[posicionPadre]){
             flotar(elemento);
         }
-        /*if(elemento>monticulo[posicionPadre]){
-            hundir(elemento);
-        }*/
-        numElementos++;
+        size++;
     }
     //devuelve la cima del montículo, la elimina del mismo y recompone la
     //propiedad de montículo.
-
     public int first() {
         int p= monticulo[0];
         return 0;
