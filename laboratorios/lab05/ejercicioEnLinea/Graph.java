@@ -10,17 +10,12 @@ class Graph{
     Graph(int vertex){
         this.vertex=vertex;
         linklist = new LinkedList[vertex];
-        
+
         for (int i=0; i<vertex; i++) {
             linklist[i] = new LinkedList();
         }
     }
     
-    void addEdge(int m, int n) {
-        linklist[m].add(n);
-        linklist[n].add(m);
-    }
-
     static void coloring() {
         int arr[] = new int[vertex];
         Arrays.fill(arr, -1);
@@ -49,4 +44,5 @@ class Graph{
         }
         System.out.println("Bicoloreable");
     }
+
 } 
