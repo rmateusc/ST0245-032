@@ -6,19 +6,19 @@ import java.util.Iterator;
  */
 class Graph{
     private static int vertex; 
-    private static LinkedList<Integer>adyacent[];
+    private static LinkedList<Integer>linklist[];
     Graph(int vertex){
         this.vertex=vertex;
-        adyacent = new LinkedList[vertex];
+        linklist = new LinkedList[vertex];
         
         for (int i=0; i<vertex; i++) {
-            adyacent[i] = new LinkedList();
+            linklist[i] = new LinkedList();
         }
     }
     
     void addEdge(int m, int n) {
-        adyacent[m].add(n);
-        adyacent[n].add(m);
+        linklist[m].add(n);
+        linklist[n].add(m);
     }
 
     static void coloring() {
@@ -28,7 +28,7 @@ class Graph{
         boolean b[] = new boolean[vertex];
         Arrays.fill(b, true);
         for (int i=1; i<vertex; i++) {
-            Iterator <Integer> it= adyacent[i].iterator();
+            Iterator <Integer> it= linklist[i].iterator();
             while(it.hasNext()) {
                 int num = it.next();
                 if (arr[num] != -1) {
