@@ -1,12 +1,9 @@
 /**
- * Esta es nuestra estructura de datos, Octree. Esta se encargara de posicionar 
- * cada abeja en un cuadrante en especfico, para asi poder determinar si se choca 
- * o no. Su principal funcion sera dividirse en ocho cuadrantes, de manera 3D. 
- * Si se encuentra mas de una abeja en un cuadrante, este cuadrante se dividira
- * en multiples subOctrees, encontrados en los limites de este, hasta que la 
- * abeja se encuentre sola, o dentro de un cuadrante de diagonal de menos de 
- * 100 metros de longitud. Esto se hace para asegurar que todas la abejas dentro 
- * de este cuadrante se estan en peligro de chocarse.
+ *This is our data structure, Octree. This will be responsible for positioning each bee in a specific quadrant, 
+ *so you can determine if it collides or not. Its main function will be divided into eight quadrants, in 3D. 
+ *If more than one bee is found in a quadrant, this quadrant will be divided into multiple subOctrees, found 
+ *in the limits of this, until the bee is alone, or within a diagonal quadrant of less than 100 meters in length. 
+ *This is done to ensure that all the bees within this quadrant are in danger of colliding.
  * @author: Daniel Otero Gomez, Rafael Mateus Carrion. 
  * @version: 4/7/2019/A
  * @see Octree
@@ -18,18 +15,18 @@ public class Octree
 {
     private double midD,midW,midH;
     /**
-     * Este sera el metodo que representara el Octree, sobre este metodo se realizara toda la recursion, aqui se asignara cada abeja a 
-     * su respectivo sector del Octree, representado por un ArrayList de 8 espacios (cada uno representando cada sector), donde sera 
-     * guardado en un LinkedList. El proceso de decidir en que sector va cada abeja lo hara el metodo hashing. Despues de que se ubique
-     * cada abeja en un sector se pasara a crear las subidvisiones del Octree con el metodo nuevoOctree. Antes de pasar a crear las nuevas
-     * subdivisiones del Octree se pregunta si la diagonal octual es menor a los 100 metros, si asi lo es pasara a imprimir las abejas 
-     * ubicadas en los sectores donde hay mas de una abeja.
-     * @param ArrayList<Bee> abejas: ArrayList con todas la abejas
-     * @param ArrayList<Double> mins: son los valores minimos de coordenadas, a los que se le sumaran otros parametros para determinar 
-     * la posicion de la abeja. Tomelo como si fuera uno de los vertices del octree.
-     * @param double midD: sera el valor de la latitud que se encuentra en la mitad de la abeja con menor latitud y la abeja con mayor latitud
-     * @param double midW: sera el valor de la longitud que se encuentra en la mitad de la abeja con menor longitid y la abeja con mayor longitud
-     * @param double midD: sera el valor de la altitud que se encuentra en la mitad de la abeja con menor altitud y la abeja con mayor altitud
+     * This will be the method that represents the Octree, on this method all the recursion will be done, here each bee will be assigned 
+     *to its respective sector of the Octree, represented by an ArrayList of 8 spaces (each one representing each sector), where it will 
+     *be stored in a LinkedList. The process of deciding which sector each bee goes to will be done by the hashing method. After each bee
+     *is located in a sector it will happen to create the sub-views of the Octree with the new method Octree. Before going on to create 
+     *the new subdivisions of the Octree, it is asked if the octual diagonal is less than 100 meters, if so it will start printing the 
+     *bees located in the sectors where there is more than one bee.
+     * @param ArrayList<Bee> abejas: ArrayList with all the bees
+     * @param ArrayList<Double> mins: they are the values of the coordinates, to which they will be sumed with all others in order to determine
+     * the posicion in the Octree. It can be resemble as a vertex of the Octree.
+     * @param double midD: will be the value of the latitude found in the middle of the bee with the lowest latitude and the bee with the highest latitude
+     * @param double midW: will be the value of the latitude found in the middle of the bee with the lowest longitude and the bee with the highest longitude
+     * @param double midD: will be the value of the latitude found in the middle of the bee with the lowest altitude and the bee with the highest altitude
      * @see hashing
      * @see nuevoOct
      */
@@ -63,15 +60,14 @@ public class Octree
     }
 
     /**
-     * Este metodo se encargara de recibir cada abeja que se encuentra en el octree, y ubicarla en un determinado sector de la estructura 
-     * de datos, de manera que lo ubicara en el espacio del ArrayList tabla correspondiente al sector en el que esta posicionada la abeja. 
-     * Determinara el sector comparando los minimos, es decir, los vertices del Octree, mas los valores medios del Octree con el que se esta
-     * trabajando.
+     * This method will be responsible for receiving each bee that is in the octree, and place it in a certain sector of the data structure, 
+     *so that it will be located in the space of the ArrayList table corresponding to the sector in which the bee is positioned. Determine the 
+     *sector by comparing the minimum, that is, the vertices of the Octree, plus the average values of the Octree with which it is being worked.
      * @param Bee abeja: abeja que sera ubicada
-     * @param ArrayList<Double> mins: este ArrayList contendra los minimos, es decir, el vertice compuesto por cada coordenada. Este parametro
-     * es necesario para poder hacer una ubicacion adecuada de cada abeja, debido a que la utilizacion de este parametro nos simplificara 
-     * el codigo de manera que solo se le tendra que ser sumado un valor para determinar si una abeja se encuentra en un sector o en otro.
-     * @return numero del sector en el que estara ubicado.
+     * @param ArrayList<Double> mins: this ArrayList will contain the minimum, that is, the vertex composed by each coordinate. This parameter 
+     *is necessary to be able to make an appropriate location for each bee, because the use of this parameter will simplify the code so that only 
+     *one value will have to be added to determine if a bee is in a sector or in other.
+     * @return number of the sector the Bee is located in.
      */
     private int hashing(Bee abeja,ArrayList<Double> mins) {
         if (abeja.getLatitude()<=mins.get(0)+midD) {
@@ -106,13 +102,13 @@ public class Octree
     }
 
     /**
-     * Este metodo se encarga de hacer la recursion, con respecto al metodo principal octree. Recibe los parametro correspondientes a las 
-     * abejas ubicada en el sector, y los vertices de este, que se encuentran en el ArrayLis mins. Con el paramtero sector identifican 
-     * como deben ser redefinidos los vertices del siguiente suboctree, ya que estos varian por sector.
-     * @param LinkedList<Bee> abejas: abejas del sector correspondiente
-     * @param ArrayList<Double> mins: son los valores minimos de coordenadas, a los que se le sumaran otros parametros para redefinir los
-     * vertices del siguiente Octree. Tomelo como si fuera uno de los vertices del octree.
-     * @param int sector: sector en el cual esta ubicado
+     * This method is responsible for making the recursion, with respect to the main octree method. Receive the parameters corresponding to 
+     *the bees located in the sector, and the vertices of this, which are in the ArrayLis mins. With the paramtero sector they identify how 
+     *the vertices of the next sub-octree should be redefined, since these vary by sector.
+     * @param LinkedList<Bee> abejas: bees of the corresponding sector
+     * @param ArrayList<Double> mins: they are the minimum values of coordinates, to which other parameters will be added to redefine the 
+     *vertex of the next Octree. Take it as if it were one of the vertex of the octree.
+     * @param int sector: sector in which it is located.
      */
     public void nuevoOctree(LinkedList<Bee> abejas,ArrayList<Double> mins,int sector) {
         if (sector==0) {
@@ -171,10 +167,9 @@ public class Octree
     }
 
     /**
-     * Este metodo se encarga de imprimir las coordenadas de todas la abejas 
-     * del sector, ya que si se llego a llamar a este metodo es 
-     * porque todas estan en peligro de chocarse.
-     * @param LinkedList<Bee> abejas: abejas del sector
+     * This sector is in charge of printing all the coordinates of the bees of the sector, if it prints them is because
+     * all these Bees are in risk of colliding.
+     * @param LinkedList<Bee> abejas: bees of the sector
      */
     public void choque(LinkedList<Bee> abejas) {
         //System.out.println("Las abejas en las siguientes coordenadas estan en peligro de chocarse");
