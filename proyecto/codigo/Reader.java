@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Collections; 
 /**
- * Esta clase se encarga de leer un archivo de texto que contiene un numero 
- * indeterminado de abejas, identificando sus coordenadas y almacenandolas en 
- * en un LinkedList de objetos Bee. Asi mismo, se encarga de guardar las 
- * coordenadas de cada abeja en otros LinkedList correspondientes a cada 
- * coordenada, para asi poder pasarselo a la clase Octree, la cual los necesita
- * para funcionar.
+ * This class is responsible for reading a text file containing an indeterminate number of 
+ *bees, identifying their coordinates and storing them in a LinkedList of Bee objects. 
+ *Likewise, it is responsible for saving the coordinates of each bee in other LinkedList 
+ *corresponding to each coordinate, so that it can be passed to the Octree class, which needs 
+ *them to function.
  * @author: Daniel Otero Gomez, Rafael Mateus Carrion. 
  * @version: 4/7/2019/A
  * @see Octree
@@ -18,22 +17,22 @@ import java.util.Collections;
  */
 public class Reader
 {
-    //Arreglos que guardan abejas y coordenadas
+    //Arrays that save the Bees and the coordinates
     LinkedList<Double> lat = new LinkedList();
     LinkedList<Double> lon = new LinkedList();
     LinkedList<Double> alt = new LinkedList();
     LinkedList<Bee> bees=new LinkedList();
     /**
-     * Este metodo se encarga de recibir una direccion de archivo guardado en 
-     * el computador y leer las lineas para asi poder pasarselas a un metodo 
-     * que pueda guardar su informacion en su respetivo LinkedList
-     * @param String dir: direccion del archivo guardado
+     * This method is in charge of recieving an adress of where the file is, 
+     * and it reads each line in order to pass them to a method that can save 
+     * this information in its corresponding LinkedList.
+     * @param String dir: adress of where the file is
      * @see splitString
      */
     public void leer (String dir) throws IOException{
         try (BufferedReader br=new BufferedReader(new FileReader(dir))){
             String line;
-            while ((line=br.readLine())!=null){ //si da
+            while ((line=br.readLine())!=null){
                 splitString(line);
             } 
         } catch (IOException e){
@@ -43,10 +42,10 @@ public class Reader
     }    
 
     /**
-     * Este metodo se encarga de recibir cada linea de coordenadas que se le es 
-     * otorgada por el metodo leer, aqui guardara las coordenadas en sus respectivos
-     * LinkedList, creara la abeja con sus coordenadas y la agregara a su LinkedList.
-     * @param String s: linea de coordenadas
+     * This method is in charge of recieving each line of coordinates that is being
+     * given by the method leer, here it will save the coordinates in its respective
+     * LinkedList, and it will create a Bee with its coordiantes and adds it to the LinkedList.
+     * @param String s: line of coordinates
      */
     public void splitString(String s){
         String [] str=s.split(",");  
@@ -61,15 +60,11 @@ public class Reader
     }
 
     /**
-     * Este metodo se encarga de obtener los minimos y los maximos de cada 
-     * coordenada, para asi poder estimar una la longitud de las diagonales 
-     * que seran creadas en la primera division del Octree, y determinar si 
-     * vale la pena crear un Octree con este conjunto de datos. Asi mismo, 
-     * este es el ultimo paso de esta clase antes de empezar a trabajar
-     * con nuestra estructura de datos Octree. Si no vale la pena crear el 
-     * Octree (debido a que la longitud de sus diagonales sera menor a 100m)
-     * se pasara a imprimir todas las coordenadas de las abejas del conjunto
-     * de datos
+     *This method is responsible for obtaining the minimum and maximum of each coordinate, so we can estimate 
+     *the length of the diagonals that will be created in the first division of the Octree, and determine if 
+     *it is worth creating an Octree with this data set. Likewise, this is the last step of this class before we
+     *start working with our Octree data structure. If it is not worth creating the Octree (because the length of 
+     *its diagonals will be less than 100m) it will be printed all the coordinates of the bees of the data set.
      * @see choque
      */
     public void getMaxMin(){
@@ -98,9 +93,8 @@ public class Reader
     }
     
     /**
-     * Este metodo se encarga de imprimir las coordenadas de todas la abejas 
-     * del conjunto de datos, ya que si se llego a llamar a este metodo es 
-     * porque todas estan en peligro de chocarse.
+     * This method is in charge of printing all the Bees of this data set,
+     * if it prints them is because all these Bees are in danger of colliding.
      */
     public void choque() {
         System.out.println("Las abejas en las siguientes coordenadas estan en peligro de chocarse");
