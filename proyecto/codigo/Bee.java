@@ -1,7 +1,7 @@
-/**
- * Este objeto se encarga de de guardar las coordenadas de cada abeja, leidas
- * en la clase Reader, en lo que llamamos Bee, para asi facilitar el manejo
- * y la comparacion de estas coordenadas a la hora de crear un Octree. 
+/*
+ * This object is in charge of saving the coordinates of each bee,
+ * wich they are read in the class Reader, in which we call Bee, in order to
+ * manage and compare the coordinates easier when creating an Octree.
  * @author: Daniel Otero Gomez, Rafael Mateus Carrion. 
  * @version: 4/7/2019/A
  * @see Octree
@@ -13,10 +13,10 @@ public class Bee
     private double longitude;
     private double altitude;
     /**
-     * Este es el constructor de la clase.
-     * @param latitude: latitud en grados
-     * @param longitude: longitud en grados
-     * @param @altitude: altitud en metros sobre el nivel del mar
+     * This is the constructor method of the class
+     * @param latitude: latitud in degrees
+     * @param longitude: longitude in degrees
+     * @param @altitude: altitude in meters
      */
     public Bee (double latitude, double longitude, double altitude){
         this.latitude=latitude;
@@ -25,7 +25,7 @@ public class Bee
     }
     
     /**
-     * Devuelve la latitud
+     * Returns the latitude
      * @return latitude
      */
     public double getLatitude(){
@@ -33,7 +33,7 @@ public class Bee
     }
     
     /**
-     * Devuelve la longitud
+     * Returns the longitude
      * @return longitude
      */
     public double getLongitude(){
@@ -41,7 +41,7 @@ public class Bee
     }
     
     /**
-     * Devuelve la altitud
+     * Returns the altitude
      * @return altitude
      */
     public double getAltitude(){
